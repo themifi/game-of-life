@@ -112,7 +112,7 @@ const drawGrid = () => {
 
     // Horizontal lines.
     for (let j = 0; j <= height; j++) {
-        ctx.moveTo(0,                           j * (CELL_SIZE + 1) + 1);
+        ctx.moveTo(0, j * (CELL_SIZE + 1) + 1);
         ctx.lineTo((CELL_SIZE + 1) * width + 1, j * (CELL_SIZE + 1) + 1);
     }
 
@@ -129,13 +129,32 @@ const drawCells = () => {
 
     ctx.beginPath();
 
+    // Alive cells.
+    ctx.fillStyle = ALIVE_COLOR;
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
             const idx = getIndex(row, col);
+            if (cells[idx] !== Cell.Alive) {
+                continue;
+            }
 
-            ctx.fillStyle = cells[idx] === Cell.Dead
-                ? DEAD_COLOR
-                : ALIVE_COLOR;
+            ctx.fillRect(
+                col * (CELL_SIZE + 1) + 1,
+                row * (CELL_SIZE + 1) + 1,
+                CELL_SIZE,
+                CELL_SIZE
+            );
+        }
+    }
+
+    // Dead cells.
+    ctx.fillStyle = DEAD_COLOR;
+    for (let row = 0; row < height; row++) {
+        for (let col = 0; col < width; col++) {
+            const idx = getIndex(row, col);
+            if (cells[idx] !== Cell.Dead) {
+                continue;
+            }
 
             ctx.fillRect(
                 col * (CELL_SIZE + 1) + 1,
