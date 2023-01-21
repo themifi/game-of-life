@@ -27,13 +27,13 @@ pub struct Timer<'a> {
 
 impl<'a> Timer<'a> {
     pub fn new(name: &'a str) -> Timer<'a> {
-        console::time_with_label(name);
+        // console::time_with_label(name);
         Timer { name }
     }
 }
 
 impl<'a> Drop for Timer<'a> {
     fn drop(&mut self) {
-        console::time_end_with_label(self.name);
+        // console::time_end_with_label(self.name);
     }
 }
