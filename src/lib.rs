@@ -67,6 +67,8 @@ impl Universe {
 #[wasm_bindgen]
 impl Universe {
     pub fn new() -> Universe {
+        utils::set_panic_hook();
+
         let width = 64;
         let height = 64;
 
@@ -79,6 +81,8 @@ impl Universe {
                 }
             })
             .collect();
+
+        utils::log!("universe initialized with size {}x{}", width, height);
 
         Universe {
             width,
