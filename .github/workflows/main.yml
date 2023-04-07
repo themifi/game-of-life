@@ -1,3 +1,5 @@
+name: CI/CD
+
 on: [push, pull_request]
 
 jobs:
@@ -9,5 +11,15 @@ jobs:
       - name: Install
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
-      - run: make build
-      - run: make test
+      - name: Build
+        run: make build
+
+      - name: Test
+        run: make test
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./www
