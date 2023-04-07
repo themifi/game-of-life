@@ -1,5 +1,6 @@
-import { Universe, Cell } from "wasm-game-of-life";
-import { memory } from "wasm-game-of-life/game_of_life_bg";
+import init, { Universe, Cell } from './pkg/game_of_life.js';
+const wasm = await init();
+const memory = wasm.memory;
 
 const CELL_SIZE = 5; // px
 const GRID_COLOR = "#CCCCCC";
