@@ -3,8 +3,12 @@ name: CI/CD
 on: [push, pull_request]
 
 jobs:
-  test:
+  ci-cd:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v2
 
