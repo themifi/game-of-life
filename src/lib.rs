@@ -5,7 +5,6 @@ extern crate js_sys;
 use wasm_bindgen::prelude::*;
 use std::fmt;
 use js_sys::Math::random;
-use utils::{log, Timer};
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -145,7 +144,6 @@ impl Universe {
     }
 
     pub fn tick(&mut self) {
-        let _timer = Timer::new("Universe::tick");
         let mut next = self.cells.clone();
 
         for row in 0..self.height {
